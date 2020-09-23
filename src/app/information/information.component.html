@@ -1,0 +1,41 @@
+<div class="container grid">
+    <form [formGroup]="orderForm">
+    <h2>UI Design Part</h2><br><hr>
+    <table class="table table-primary table-hover">
+      <thead>
+          <tr>
+          <th>albumId </th>
+          <th>id </th>
+          <th>title </th>
+          <th>url</th>
+          <th>thumbnailUrl</th>
+          <th>Delete</th>
+          <th>edit</th>
+          </tr>
+      </thead>
+          <tbody>
+              <tr *ngFor="let item of orderForm.get('items')['controls'] | paginate: { itemsPerPage: 50, currentPage: p } ; index as i">
+                  <td>
+                    <span *ngIf="!(totallength>i)"><input [formControl]="item.get('albumId')" placeholder="albumId"></span>
+                    <span *ngIf="(totallength>i)">{{item.get('albumId').value}}</span>
+                  </td>
+                  <td>
+                    <span *ngIf="!(totallength>i)"><input [formControl]="item.get('id')" placeholder="id"></span>
+                    <span *ngIf="(totallength>i)">{{item.get('id').value}}</span></td>
+                  <td>
+                    <span *ngIf="!(totallength>i)"><input [formControl]="item.get('title')" placeholder="title"></span>
+                    <span *ngIf="(totallength>i)">{{item.get('title').value}}</span></td>
+                  <td>
+                    <span *ngIf="!(totallength>i)"><input [formControl]="item.get('url')" placeholder="url"></span>
+                    <span *ngIf="(totallength>i)">{{item.get('url').value}}</span></td>
+                  <td>
+                    <span *ngIf="!(totallength>i)"><input [formControl]="item.get('thumbnailUrl')" placeholder="thumbnailUrl"></span>
+                    <span *ngIf="(totallength>i)">{{item.get('thumbnailUrl').value}}</span></td>
+                  <td type="button" class="glyphicon glyphicon-trash" (click)="Deletrow(i)"></td>
+              </tr>
+            </tbody>
+        </table>
+      <button type="button" class="glyphicon glyphicon-plus"(click)="onAddPrduct()"></button>
+    </form>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
